@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Just a moment…</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at bottom, #020617, #000);
+      font-family: system-ui, sans-serif;
+      color: #e5e7eb;
+    }
+
+    /* 🌙 Moon */
+    .moon {
+      position: absolute;
+      top: 10%;
+      right: 15%;
+      width: 120px;
+      height: 120px;
+      background: #f8fafc;
+      border-radius: 50%;
+      box-shadow: 0 0 40px rgba(248,250,252,0.4);
+      opacity: 0.9;
+    }
+
+    /* ✨ Stars */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      opacity: 0.8;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      width: 90%;
+      max-width: 400px;
+      background: rgba(2,6,23,0.85);
+      backdrop-filter: blur(6px);
+      padding: 30px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    }
+
+    .bar {
+      height: 12px;
+      background: #1e293b;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      transition: width 0.4s ease;
+    }
+
+    .text {
+      font-size: 14px;
+      opacity: 0.75;
+    }
+
+    .final {
+      display: none;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Moon -->
+  <div class="moon"></div>
+
+  <!-- Stars -->
+  <script>
+    for (let i = 0; i < 60; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.top = Math.random() * 100 + "vh";
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.animationDelay = Math.random() * 3 + "s";
+      document.body.appendChild(star);
+    }
+  </script>
+
+  <!-- Card -->
+  <div class="card">
+    <h3 id="title">Loading…</h3>
+
+    <div class="bar">
+      <div class="fill" id="fill"></div>
+    </div>
+
+    <p class="text" id="status">Please wait...</p>
+
+    <div class="final" id="final">
+      <p><strong>Okay 😄 you passed.patience indo nnu nokkiyatha hehe..</strong></p>
+      <p>
+        Happiest bdy wishes annammeeee...❤️🎉<br/>
+        Hope today is as calm and beautiful<br/>
+        as a night with the moon 🌙<br/>
+        hehehe kollavo...😁😌</br>
+      pinna ithinu vere meaning onnulla just inje bdy kk oru surprise tharan thonni thats all hehee...🙌🏻🤍
+      </p>
+      <p style="opacity:0.6;font-size:13px;">
+        Made just for today...
+      </p>
+    </div>
+  </div>
+
+  <script>
+    let progress = 0;
+    const fill = document.getElementById("fill");
+    const status = document.getElementById("status");
+    const title = document.getElementById("title");
+    const final = document.getElementById("final");
+
+    const messages = [
+      "Still loading…😁",
+      "Almost there…😁",
+      "Just a second…😁",
+      "Hmm…",
+      "Processing…😌"
+    ];
+
+    function load() {
+      if (progress < 90) {
+        progress += Math.random() * 8;
+        fill.style.width = progress + "%";
+        status.textContent = messages[Math.floor(Math.random() * messages.length)];
+        setTimeout(load, 600);
+      } else {
+        setTimeout(() => {
+          fill.style.width = "100%";
+          title.textContent = "Done ✔️";
+          status.style.display = "none";
+          final.style.display = "block";
+        }, 1200);
+      }
+    }
+
+    load();
+  </script>
+
+</body>
+</html>
